@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Tracker</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 40px auto; }
+        .task-card { border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; border-radius: 5px; }
+        .btn { background-color: #28a745; color: white; padding: 5px 10px; text-decoration: none; border-radius: 3px;}
+        input { padding: 8px; margin-right: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>🎓 My Productivity Tracker</h1>
+
+    <div style="background: #f9f9f9; padding: 20px; border-radius: 10px;">
+        <h3>Add New Task</h3>
+        <form action="/add" method="post">
+            <input type="text" name="subject" placeholder="Subject (e.g. Math)" required>
+            <input type="text" name="task" placeholder="Task Description" required>
+            <button type="submit">Add Task</button>
+        </form>
+    </div>
+
+    <hr>
+
+    <h3>📝 Pending Tasks</h3>
+    
+    {% for task in tasks %}
+        <div class="task-card">
+            <strong>{{ task['subject'] }}</strong>: {{ task['task'] }}
+            <a href="/complete/{{ task['id'] }}" class="btn" style="float: right;">Mark Done ✅</a>
+        </div>
+    {% else %}
+        <p>No pending tasks! Time to relax. 🏖️</p>
+    {% endfor %}
+
+</body>
+</html>
